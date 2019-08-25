@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Captcha ne kadar güvenilir?</title>
+    <title>w3challs reverse captcha</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -74,9 +74,9 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1>Captcha ne kadar güvenilir?</h1>
-                        <h2 class="subheading">Günümüzün en çok kullanılan ddos önlemlerinden captcha</h2>
-                        <span class="meta">Posted by Fuat Fuçucuoğlu<a href="#">, Web</a>, 28 Mayıs 2019</p>
+                        <h1>w3challs reverse captcha writeup</h1>
+                       <!--<h2 class="subheading">Günümüzün en çok kullanılan ddos önlemlerinden captcha</h2>-->
+                        <span class="meta">Posted by Fuat Fuçucuoğlu<a href="#">, Writeups</a>, 28 Mayıs 2019</p>
                     </div>
                 </div>
             </div>
@@ -89,16 +89,11 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 					<h1>ai_captcha_solver</h1>
-                    <p>Deep learning hızla ilerleken makinalar ile insanlar arasındaki farkı ayırt etmek günden güne zorlaşıyor.
-					Bugün bir ai_captcha_solver toolu ile capthca çözemeye çalışacağız.</p>
+                    <p>Görevimiz bir dakika içinde verilen 50 captchanın en az 45 tanesini çözmek.
+                    Bunun için deep learning algoritması ile captcha çözen 
+                    bir python scripti yazdım ve open source olarak Github'ımda paylaştım.<a href="https://github.com/ffucucuoglu/ai_captcha_solver/tree/master/ai_captcha_solver">(link)</a></p>                
 
-                    <p>Algoritmamız şu şekilde olacak:</p>
-					
-					<ul>
-						<li>Yeteri kadar captcha indir ve çöz.</li>
-						<li>Cevaplanmış captchaları deep learning algoritmasına ver.</li>
-						<li>Gerekli parametreleri girerek bir urldeki captchayı durmadan çöz.</li>
-					</ul>
+
 					<h3>Kod 4 moddan oluşuyor bunlar:</h3><p></p>
 					
 					<h4>capture_captcha(-f)</h4>
@@ -159,22 +154,11 @@
 					<code>python3 main.py -t 10</code>
 					<blockquote>Deep learning algoritmasında on kez train ettik.
 					Bu kod sonunda model_labels.dat ve captcha_model.hdf5 dosyaları oluşur.</blockquote>
-	
-	
-					<h3>Ve saldırı...</h3>
-					<code>python3 main.py --url "https://w3challs.com/challs/Prog/captchas/reversecaptcha.php" -a 10 -x "/html/body/img" -b "/html/body/center/form/table/tbody/tr/td/font/center[51]/input" -w "/html/body/center/form/table/tbody/tr/td/font/center[1]/input" -c "https://w3challs.com/challs/Prog/captchas/gen_captcha.php?num=0&"</code>
-					<blockquote>Burada ise model_labels.dat ve captcha_model.hdf5 dosyalarını kullanarak verilen link ve xpathteki captcha çözülür ve butana basılır.</blockquote>
-	
-                    <a href="#">
-                        <img class="img-responsive" src="img/post1g2.gif" alt="">
-                    </a>
-                    <span class="caption text-muted">ve mutlu son :)</span>
-
-                    <p>Aslına ben bu yazılımı <a href="https://w3challs.com/challenges/challenge57">w3challs</a>'taki reverse captcha görevi için gelirştirmiştim.Üzerinde biraz değişiklik yapılarak görev için de kullanılabilir.</p>
+                    <p><br></p>
 					<a href="#">
                         <img class="img-responsive" src="img/post1g.gif" alt="">
                     </a>
-                  
+                    <blockquote>Gerekli duzenlemeler yapıldığında kod başarıyla çalışıyor.</blockquote>
                     <p><a href="https://medium.com/@ageitgey/how-to-break-a-captcha-system-in-15-minutes-with-machine-learning-dbebb035a710">Referanslar</a></p>
                 </div>
             </div>
