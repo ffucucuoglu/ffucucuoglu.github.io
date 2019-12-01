@@ -121,7 +121,7 @@
                     </a>
                     <p>Şimdi main kodunu compile edip karşılaştıralım.</p>
                     <code>clang -O1 -emit-llvm main.c -c -o main.bc</code>
-                    <p>ile compile ettiğimizde main.bc adında llvm ir bitcode'u oluşur. Bunu istersek lli ile just in time(JIT) olarak calistirabiliriz, istersek<code>llc main.bs -o main.s </code>yaparak x86 koduna generate edebiliriz. Ama biz şuan <code>llvm-dis main.bc -o main.ll</code> yaparak ir dilindeki kodları karşılaştıracağız. Kodumuzun çıktısı şu şekilde:</p>
+                    <p>ile compile ettiğimizde main.bc adında llvm ir bitcode'u oluşur. Bunu istersek lli ile just in time(JIT) olarak çalıştırabiliriz, istersek<code>llc main.bs -o main.s </code>yaparak x86 koduna çevirebiliriz. Ama biz şuan <code>llvm-dis main.bc -o main.ll</code> yaparak ir dilindeki kodları karşılaştıracağız. Kodumuzun çıktısı şu şekilde:</p>
 
                      </p>
                     <a>
