@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LLVM nedir ?</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">ffucucuoglu</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                    </li><!--
+                    <li>
+                        <a href="post.html">Sample Post</a>
+                    </li>-->
+                   <!-- <li>
+                        <a href="contact.html">Contact</a>
+                    </li>-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/post5-2.png')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1 style="color:#699bc4; ">LLVM NEDİR ?</h1>
+                       <!--<h2 class="subheading">Günümüzün en çok kullanılan ddos önlemlerinden captcha</h2>-->
+                        <span style="color:#699bc4;meta;background:white";>Posted by Fuat Fuçucuoğlu<a>, Low-level</a>, 1 Aralık 2019</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+					<h1>LLVM Nedir?</h1>
+                    <p>Low level virtual machine, 2000 yılında Illinois at Urbana–Champaign üniversitesi tarafindan geliştirilmeye başlanmış apache lisansli bir açık kaynak compiler(infrastructure) altyapisidir.Günümüzde ise birçok mini projeye bölünmüş bir frameworke dönüşmüştür. Temel çıkış amacı ayrı bir compiler yazmaya gerek kalmaması için compiler'a derleme aşamasında müdahale edebilme çabasıdır. Bunun için compiler'a ek bir aşama daha eklenmiştir.</p>                
+
+                    <a>
+                        <img class="img-responsive" src="img/post5-1.png" alt="">
+                    </a>
+
+                    <p>Şekilde görüldüğü gibi llvm bir IR(intermide representation) kodu üretir.Tıpkı Java veya .NET'te olduğu gibi. Peki bunun ne gibi avantajları var, gelin inceleyelim.
+                    </p>
+
+					<h3>LLVM IR</h3><p></p>
+					
+					<p>Program llvm ir aşamasından sonra dinamik olarak compile edilmez. Sadece statik compile ile kod uygun işlemci mimarisine çevrilir. İşte tam burada ister yazdığımız bir kodu compile edip compiler'larda normalde alamayacagimiz bir çıktı alabilir, ister yazdığımız kodu optimize hale getirir, analiz ederiz, istersek de programımızı çeşitli platformlara küçük dokunuşlarla cross compile edebiliriz.<p>
+                    <a>
+                        <img class="img-responsive" src="img/post5-diagram.png" alt="">
+                    </a>
+                    <p>Basit bir C kodu yukarıdaki gibi compile olur. main.ll bölümünde programa isteğimiz müdahaleleri yapar, ister JIT ile çalıştırır, ister native bir assembly çıktısı alırız.</p>
+                    </p>Şimdi gelin birlikte llvm ir backend kısmında bir program geliştirelim.</p>
+					<h4>Hello world!!!</h4>
+                    <p>
+                       Başta IR syntax'ini tanıyalım. IR dilinde değişkenler tanımlanırken kaç bit oldukları gösterilir. Örneğin standart 32 bitlik bir integer i32 olarak belirtilir ve başlarına '%' isareti konur. Fonksiyonlar ise define keywordu ile belirtilir, başlarına da '@' işareti konur. Şimdi örnek bir C kodu inceleyelim.
+                    </p>
+                    <a>
+                        <img class="img-responsive" src="img/post5-fun.png" alt="">
+                    </a>
+                    <p>
+                       Herhangi bir kütüphane include edilmemiş, sadece integer döndüren bir fonksiyon var. Bu durumda çıktı şuna yakın bir şey olacaktır.
+                    </p>
+                    <a>
+                        <img class="img-responsive" src="img/post5-irfun.png" alt="">
+                    </a>
+                    <p>Şimdi main kodunu compile edip karşılaştıralım.</p>
+                    <code>clang -O1 -emit-llvm main.c -c -o main.bc</code>
+                    <p>ile compile ettiğimizde main.bc adında llvm ir bitcode'u oluşur. Bunu istersek lli ile just in time(JIT) olarak calistirabiliriz, istersek<code>llc main.bs -o main.s </code>yaparak x86 koduna generate edebiliriz. Ama biz şuan <code>llvm-dis main.bc -o main.ll</code> yaparak ir dilindeki kodları karşılaştıracağız. Kodumuzun çıktısı şu şekilde:</p>
+
+                     </p>
+                    <a>
+                        <img class="img-responsive" src="img/post5-realir.png" alt="">
+                    </a>
+                    <p>
+                        Fun fonksiyonunda %0 ve %1 argüman olarak alınmış.
+                         Ardından %3 oluşturulmuş ve shl instruction'ı ile bitwise shiftleft yapılmış.(Bu işlemciler için 2 ile çarpmaktan daha verimli bir yol.) Ardından %4 değişkeni oluşturulmuş ve %1 ile %3 çarpılarak %4e atanmış ve return edilmiş.
+                         Main fonksiyonunda ise görüldüğü üzere fun, 4 ve 5 argümanlarıyla çağırılmış, dönen değer main scope'undaki %1'e atanmış ve return olmuş. Şunu da eklemekte fayda var.Biz clang ile compile ederken -O1 parametresini kullandık.Bu otomatik optimize etme seviyesini belirtir.Mesela bu kodda -O3 yapsaydık compiler fun(4,5) için sonucun her zaman 40 olacağını anlardı ve mainde 40 değeri bir değişkene dahi atanmadan return olurdu.
+                        </p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                    
+                        <li>
+                            <a href="https://github.com/ffucucuoglu">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; ffucucuoglu 2019</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
