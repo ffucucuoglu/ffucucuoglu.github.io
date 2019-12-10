@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>LLVM nedir ?</title>
+    <title>UPX manual unpacking</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -69,14 +69,14 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/post5-2.png')">
+    <header class="intro-header" style="background-image: url('img/upxwall.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1 style="color:#699bc4; ">LLVM NEDİR ?</h1>
+                        <h1>UPX manual unpacking</h1>
                        <!--<h2 class="subheading">Günümüzün en çok kullanılan ddos önlemlerinden captcha</h2>-->
-                        <span style="color:#699bc4;meta;background:white";>Posted by Fuat Fuçucuoğlu<a>, Low-level</a>, 1 Aralık 2019</p>
+                        <span class="meta">Posted by Fuat Fuçucuoğlu<a href="#">, Writeups</a>, 11 Aralık 2019</p>
                     </div>
                 </div>
             </div>
@@ -88,50 +88,56 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-					<h1>LLVM Nedir?</h1>
-                    <p>Low level virtual machine, 2000 yılında Illinois at Urbana–Champaign üniversitesi tarafindan geliştirilmeye başlanmış apache lisansli bir açık kaynak compiler(infrastructure) altyapisidir.Günümüzde ise birçok mini projeye bölünmüş bir frameworke dönüşmüştür. Temel çıkış amacı ayrı bir compiler yazmaya gerek kalmaması için compiler'a derleme aşamasında müdahale edebilme çabasıdır. Bunun için compiler'a ek bir aşama daha eklenmiştir.</p>                
+					<h1>Upx manual unpacking</h1>
+                    <p> Merhabalar. Bu yazımda upx ile packlenmis executable dosyayı manuel olarak unpack edeceğiz.
+ Dosyamız basit bir yılan oyunu. Aşağıdaki şekilde görüldüğü gibi UPX 3.95 ile pack edilimiş.</p>                
 
-                    <a>
-                        <img class="img-responsive" src="img/post5-1.png" alt="">
+ 					<a href="#">
+                        <img class="img-responsive" src="img/post6-1.png" alt="">
                     </a>
 
-                    <p>Şekilde görüldüğü gibi llvm bir IR(intermide representation) kodu üretir.Tıpkı Java veya .NET'te olduğu gibi. Peki bunun ne gibi avantajları var, gelin inceleyelim.
-                    </p>
+					<p>Bu işlemi yapmak için öncelikle packerlarin nasıl çalıştığını bilmemiz gerekiyor.
+ Packerler bir executable dosyanın çalıştırılabilir kısmını sıkıştırıp veri olarak depolarlar. Çalıştırma zamanında ise sıkıştırılmış kısmı açıp çalıştırırlar. Böylece hem dosyanın boyutu küçülür hem de dosyayı analiz etmek isteyenlerin işi zorlaşır.
+ Şimdi karşımızda sıkıştırılmış bir dosya var. Bizim yapmamız gereken ise bu dosyanın çalıştırılma zamanında decompress işlemini bulup düzeltilmiş çalıştırılabilir halini kaydetmek.
+ Bunu yapmak için öncelikle dosyamızı x32dbg ile açıyoruz ve entryPointe geliyoruz. Şimdi programımızın kendini decompress ettiği yeri bulmamız gerekiyor. Program kendini stack'e yazacak ve burada decompress işlemini gerçekleştirecek. O halde espyi takip edeceğiz. Programın ilk instructioni pushad. Programı ilk instruction için çalıştırıyoruz. Pushadd tüm genel amaçlı yazmaçlara atama yapacak. Ardından esp pointerini takip edebilirz. Bunun için esp'ye sağ tık yapıp follow in dump diyouz. Şimdi espnin memoryde gösterdiği yeri seçip hardware breakpoint koyuyoruz. Böylece stackin bu alanında veri okunur veya yazılırken program duracak.</p>
 
-					<h3>LLVM IR</h3><p></p>
-					
-					<p>Program llvm ir aşamasından sonra dinamik olarak compile edilmez. Sadece statik compile ile kod uygun işlemci mimarisine çevrilir. İşte tam burada ister yazdığımız bir kodu compile edip compiler'larda normalde alamayacagimiz bir çıktı alabilir, ister yazdığımız kodu optimize hale getirir, analiz ederiz, istersek de programımızı çeşitli platformlara küçük dokunuşlarla cross compile edebiliriz.<p>
-                    <a>
-                        <img class="img-responsive" src="img/post5-diagram.png" alt="">
-                    </a>
-                    <p>Basit bir C kodu yukarıdaki gibi compile olur. main.ll bölümünde programa isteğimiz müdahaleleri yapar, ister JIT ile çalıştırır, ister native bir assembly çıktısı alırız.</p>
-                    </p>Şimdi gelin birlikte llvm ir backend kısmında bir program geliştirelim.</p>
-					<h4>Hello world!!!</h4>
-                    <p>
-                       Başta IR syntax'ini tanıyalım. IR dilinde değişkenler tanımlanırken kaç bit oldukları gösterilir. Örneğin standart 32 bitlik bir integer i32 olarak belirtilir ve başlarına '%' isareti konur. Fonksiyonlar ise define keywordu ile belirtilir, başlarına da '@' işareti konur. Şimdi örnek bir C kodu inceleyelim.
-                    </p>
-                    <a>
-                        <img class="img-responsive" src="img/post5-fun.png" alt="">
-                    </a>
-                    <p>
-                       Herhangi bir kütüphane include edilmemiş, sadece integer döndüren bir fonksiyon var. Bu durumda çıktı şuna yakın bir şey olacaktır.
-                    </p>
-                    <a>
-                        <img class="img-responsive" src="img/post5-irfun.png" alt="">
-                    </a>
-                    <p>Şimdi main kodunu compile edip karşılaştıralım.</p>
-                    <code>clang -O1 -emit-llvm main.c -c -o main.bc</code>
-                    <p>ile compile ettiğimizde main.bc adında llvm ir bitcode'u oluşur. Bunu istersek lli ile just in time(JIT) olarak calistirabiliriz, istersek<code>llc main.bs -o main.s </code>yaparak x86 koduna generate edebiliriz. Ama biz şuan <code>llvm-dis main.bc -o main.ll</code> yaparak ir dilindeki kodları karşılaştıracağız. Kodumuzun çıktısı şu şekilde:</p>
 
-                     </p>
-                    <a>
-                        <img class="img-responsive" src="img/post5-realir.png" alt="">
+					<a href="#">
+                        <img class="img-responsive" src="img/post6-3.png" alt="">
                     </a>
-                    <p>
-                        Fun fonksiyonunda %0 ve %1 argüman olarak alınmış.
-                         Ardından %3 oluşturulmuş ve shl instruction'ı ile bitwise shiftleft yapılmış.(Bu işlemciler için 2 ile çarpmaktan daha verimli bir yol.) Ardından %4 değişkeni oluşturulmuş ve %1 ile %3 çarpılarak %4e atanmış ve return edilmiş.
-                         Main fonksiyonunda ise görüldüğü üzere fun, 4 ve 5 argümanlarıyla çağırılmış, dönen değer main scope'undaki %1'e atanmış ve return olmuş. Şunu da eklemekte fayda var.Biz clang ile compile ederken -O1 parametresini kullandık.Bu otomatik optimize etme seviyesini belirtir.Mesela bu kodda -O3 yapsaydık compiler fun(4,5) için sonucun her zaman 40 olacağını anlardı ve mainde 40 değeri bir değişkene dahi atanmadan return olurdu.
-                        </p>
+
+
+                    <p>Şimdi programı tekrar çalıştırıyoruz ve eip şuraya geliyor:</p>
+<a href="#">
+                        <img class="img-responsive" src="img/post6-4.png" alt="">
+                    </a>
+
+                    <p>Popad registeri genelral purpose registerleri stacke yazar. Aradığımız şey de tam olarak böyle bir şeydi. Sonuçta program artık farklı bir yerde çalışmaya devam edecek.
+ Şu an registerlarını tekrar kullanabilmek için stack'te depoluyor. Program bir süre stacke 0 pushladıktan sonra bir jump işlemi yapıyor. Jmp snake.401014'e breakpoint
+ koyup programı Çalıştırıyoruz , arından jump edilen yere gidiyoruz. Orası da bizi başka bir yere jump ediyor ve şöyle bir yere geliyoruz.</p>
+
+ <a href="#">
+                        <img class="img-responsive" src="img/post6-5.png" alt="">
+                    </a>
+
+<p>İşte burası programın unpack edilmiş hali. Burda OllyDumpEx plugini ile programın anlık dumpını alıyoruz.</p>
+
+<a href="#">
+                        <img class="img-responsive" src="img/post6-6.png" alt="">
+                    </a>
+                    <p>Burada önemli bir nokta var. Bu dump ayrı bir çalıştırılabilir dosya olacak. Bu dosyanın headerinde tutulan original entry point bilgisini girmemiz gerekiyor.
+ Bu değer eipin bu kısma geldiğindeki değerdir. Şu anki adresimiz 401060,image base'imiz 400000.Bu durumda oep değerimiz 1060 olur. Get eip as oep butonu
+ bunu bizim için yapıyor. Butona tıklayıp dump diyoruz. Ancak hala bitmedi. Programımızın bu kısmı çalışırken programın kalan kısmından import adres table
+ bilgisini alıyor. Bunu düzeltmek için de ImpREC adındaki toolu kullanacağız. Hali hazırda debugger üzerinde çalışan snake.exe uygulamasını seçip oep değerini girdikten sonra IAT AutoSearch butonuna tıklayıp import table'ini aratıyoruz. Ardından get imports dediğimizde ImpREC importlari otomatik olarak alıyor.</p>
+
+
+<a href="#">
+                        <img class="img-responsive" src="img/post6-7.png" alt="">
+                    </a>
+
+                    <p>Son olarak fix Dump butonuna tıklayarak az önce dump ettiğimiz Snake_dump.exe dosyasını seçiyoruz. Bu program da bize Snake_dump_.exe adındaki çalıştırılabilir dosyayı veriyor.
+</p>
+
                 </div>
             </div>
         </div>

